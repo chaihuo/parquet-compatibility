@@ -50,7 +50,7 @@ public class MysqlWriteSupport extends WriteSupport<List<String>> {
   public void write(List<String> values) {
     if (values.size() != cols.size()) {
       throw new ParquetEncodingException("Invalid input data. Expecting " +
-          cols.size() + " columns. Input had " + values.size() + " columns (" + cols + ") : " + values);
+              cols.size() + " columns. Input had " + values.size() + " columns (" + cols + ") : " + values);
     }
 
     recordConsumer.startMessage();
@@ -60,27 +60,27 @@ public class MysqlWriteSupport extends WriteSupport<List<String>> {
       if (val.length() > 0) {
         recordConsumer.startField(cols.get(i).getPath()[0], i);
         switch (cols.get(i).getType()) {
-        case BOOLEAN:
-          recordConsumer.addBoolean(Boolean.parseBoolean(val));
-          break;
-        case FLOAT:
-          recordConsumer.addFloat(Float.parseFloat(val));
-          break;
-        case DOUBLE:
-          recordConsumer.addDouble(Double.parseDouble(val));
-          break;
-        case INT32:
-          recordConsumer.addInteger(Integer.parseInt(val));
-          break;
-        case INT64:
-          recordConsumer.addLong(Long.parseLong(val));
-          break;
-        case BINARY:
-          recordConsumer.addBinary(stringToBinary(val));
-          break;
-        default:
-          throw new ParquetEncodingException(
-              "Unsupported column type: " + cols.get(i).getType());
+          case BOOLEAN:
+            recordConsumer.addBoolean(Boolean.parseBoolean(val));
+            break;
+          case FLOAT:
+            recordConsumer.addFloat(Float.parseFloat(val));
+            break;
+          case DOUBLE:
+            recordConsumer.addDouble(Double.parseDouble(val));
+            break;
+          case INT32:
+            recordConsumer.addInteger(Integer.parseInt(val));
+            break;
+          case INT64:
+            recordConsumer.addLong(Long.parseLong(val));
+            break;
+          case BINARY:
+            recordConsumer.addBinary(stringToBinary(val));
+            break;
+          default:
+            throw new ParquetEncodingException(
+                    "Unsupported column type: " + cols.get(i).getType());
         }
         recordConsumer.endField(cols.get(i).getPath()[0], i);
       }
