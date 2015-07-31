@@ -34,6 +34,6 @@ public class MysqlParquetWriter extends ParquetWriter<List<String>> {
   }
 
   public MysqlParquetWriter(Path file, MessageType schema, CompressionCodecName codecName, boolean enableDictionary) throws IOException {
-    super(file, (WriteSupport<List<String>>) new MysqlWriteSupport(schema), codecName, DEFAULT_BLOCK_SIZE, DEFAULT_PAGE_SIZE, enableDictionary, false);
+    super(file, new MysqlWriteSupport(schema), codecName, DEFAULT_BLOCK_SIZE, DEFAULT_PAGE_SIZE, enableDictionary, false);
   }
 }
